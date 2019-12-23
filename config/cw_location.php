@@ -2,5 +2,5 @@
 
 return [
     'layout' => env('CW_LAYOUT', 'layouts.app'),
-    'views' => env('CW_LOCATION_VIEWS', 'location::')
+    'views' => env('CW_VIEWS', 'location::')
 ];
