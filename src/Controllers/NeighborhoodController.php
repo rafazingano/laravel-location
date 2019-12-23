@@ -27,17 +27,17 @@ class NeighborhoodController extends Controller
     public function trashed()
     {
         $this->data['neighborhoods'] = resolve('NeighborhoodService')->trashed();
-        return view('location::neighborhoods.index', $this->data);
+        return view(config('cw_location.views') . 'neighborhoods.index', $this->data);
     }
 
     public function index(NeighborhoodDataTable $neighborhoodDataTable)
     {
-        return $neighborhoodDataTable->render('location::neighborhoods.index', $this->data);
+        return $neighborhoodDataTable->render(config('cw_location.views') . 'neighborhoods.index', $this->data);
     }
 
     public function create()
     {
-        return view('location::neighborhoods.create');
+        return view(config('cw_location.views') . 'neighborhoods.create');
     }
 
     public function store(StoreNeighborhoodRequest $request)
@@ -58,7 +58,7 @@ class NeighborhoodController extends Controller
     public function edit($id)
     {
         $this->data['neighborhood'] = resolve('NeighborhoodService')->find($id);
-        return view('location::neighborhoods.edit', $this->data);
+        return view(config('cw_location.views') . 'neighborhoods.edit', $this->data);
     }
 
     public function update(UpdateNeighborhoodRequest $request, $id)

@@ -25,18 +25,18 @@ class AddressController extends Controller
     public function trashed()
     {
         $this->data['addreses'] = resolve('AddressService')->trashed();
-        return view('location::addresses.index', $this->data);
+        return view(config('cw_location.views') . 'addresses.index', $this->data);
     }
 
     public function index(AddressDataTable $addressDataTable)
     {
         $this->data['addresses'] = resolve('AddressService')->all();
-        return $addressDataTable->render('location::addresses.index', $this->data);
+        return $addressDataTable->render(config('cw_location.views') . 'addresses.index', $this->data);
     }
 
     public function create()
     {
-        return view('location::addresses.create', $this->data);
+        return view(config('cw_location.views') . 'addresses.create', $this->data);
     }
 
     public function store(StoreAddressRequest $request)
@@ -57,7 +57,7 @@ class AddressController extends Controller
     public function edit($id)
     {
         $data['country'] = resolve('AddressService')->find($id);
-        return view('location::addresses.edit', $data);
+        return view(config('cw_location.views') . 'addresses.edit', $data);
     }
 
     public function update(UpdateAddressRequest $request, $id)

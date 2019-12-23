@@ -29,18 +29,18 @@ class CityController extends Controller
     public function trashed()
     {
         $this->data['cities'] = resolve('CityService')->trashed();
-        return view('location::cities.index', $this->data);
+        return view(config('cw_location.views') . 'cities.index', $this->data);
     }
 
     public function index(CityDataTable $cityDataTable)
     {
         $this->data['cities'] = resolve('CityService')->all();
-        return $cityDataTable->render('location::cities.index', $this->data);
+        return $cityDataTable->render(config('cw_location.views') . 'cities.index', $this->data);
     }
 
     public function create()
     {
-        return view('location::cities.create', $this->data);
+        return view(config('cw_location.views') . 'cities.create', $this->data);
     }
 
     public function store(StoreCityRequest $request)
@@ -60,7 +60,7 @@ class CityController extends Controller
     public function edit($id)
     {
         $data['city'] = resolve('CityService')->find($id);
-        return view('location::cities.edit', $data);
+        return view(config('cw_location.views') . 'cities.edit', $data);
     }
 
     public function update(UpdateCityRequest $request, $id)

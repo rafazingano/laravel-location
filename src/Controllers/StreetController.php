@@ -24,18 +24,18 @@ class StreetController extends Controller
     public function trashed()
     {
         $this->data['countries'] = resolve('CountryService')->trashed();
-        return view('location::countries.index', $this->data);
+        return view(config('cw_location.views') . 'streets.index', $this->data);
     }
 
     public function index(CountryDataTable $countryDataTable)
     {
         $this->data['countries'] = resolve('CountryService')->all();
-        return $countryDataTable->render('location::countries.index', $this->data);
+        return $countryDataTable->render(config('cw_location.views') . 'streets.index', $this->data);
     }
 
     public function create()
     {
-        return view('location::countries.create');
+        return view(config('cw_location.views') . 'streets.create');
     }
 
     public function store(StoreCountryRequest $request)
@@ -56,7 +56,7 @@ class StreetController extends Controller
     public function edit($id)
     {
         $data['country'] = resolve('CountryService')->find($id);
-        return view('location::countries.edit', $data);
+        return view(config('cw_location.views') . 'streets.edit', $data);
     }
 
     public function update(UpdateCountryRequest $request, $id)

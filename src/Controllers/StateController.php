@@ -28,19 +28,19 @@ class StateController extends Controller
 
     public function trashed()
     {
-        $this->data['countries'] = resolve('StateService')->trashed();
-        return view('location::countries.index', $this->data);
+        $this->data['states'] = resolve('StateService')->trashed();
+        return view(config('cw_location.views') . 'states.index', $this->data);
     }
 
     public function index(StateDataTable $StateDataTable)
     {
-        $this->data['countries'] = resolve('StateService')->all();
-        return $StateDataTable->render('location::countries.index', $this->data);
+        $this->data['states'] = resolve('StateService')->all();
+        return $StateDataTable->render(config('cw_location.views') . 'states.index', $this->data);
     }
 
     public function create()
     {
-        return view('location::countries.create');
+        return view(config('cw_location.views') . 'states.create');
     }
 
     public function store(StoreStateRequest $request)
@@ -48,8 +48,8 @@ class StateController extends Controller
         $input = $request->all();
         $State = resolve('StateService')->create($input);
         return redirect()
-            ->route('admin.locations.countries.edit', $State->id)
-            ->with('status', __('location::countries.created.successfully'));
+            ->route('admin.locations.states.edit', $State->id)
+            ->with('status', __('location::states.created.successfully'));
     }
 
     public function show($id)
@@ -60,8 +60,8 @@ class StateController extends Controller
 
     public function edit($id)
     {
-        $data['State'] = resolve('StateService')->find($id);
-        return view('location::countries.edit', $data);
+        $data['state'] = resolve('StateService')->find($id);
+        return view(config('cw_location.views') . 'states.edit', $data);
     }
 
     public function update(UpdateStateRequest $request, $id)
@@ -69,15 +69,15 @@ class StateController extends Controller
         $input = $request->all();
         $State = resolve('StateService')->update($input, $id);
         return redirect()
-            ->route('admin.locations.countries.edit', $State->id)
-            ->with('status', __('location::countries.update.successfully'));
+            ->route('admin.locations.states.edit', $State->id)
+            ->with('status', __('location::states.update.successfully'));
     }
 
     public function destroy($id)
     {
         $State = resolve('StateService')->destroy($id);
         return redirect()
-            ->route('admin.locations.countries.index')
-            ->with('status', __('location::countries.destroy.successfully'));
+            ->route('admin.locations.states.index')
+            ->with('status', __('location::states.destroy.successfully'));
     }
 }
