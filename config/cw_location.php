@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'layout' => 'layouts.app'
+    'layout' => env('CW_LAYOUT', 'layouts.app')
 ];
