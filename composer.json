@@ -1,0 +1,39 @@
+{
+    "name": "confrariaweb/laravel-location",
+    "description": "Location pack for laravel framework",
+    "keywords": [
+        "location",
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Rafael Zingano",
+            "email": "confrariaweb@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "laravel/framework": "^6",
+        "confrariaweb/laravel-select2": "dev-master",
+        "confrariaweb/laravel-vendor": "dev-master",
+        "laravelcollective/html": "^6.0",
+        "yajra/laravel-datatables": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ConfrariaWeb\\Location\\": "src/",
+            "ConfrariaWeb\\Location\\Databases\\Seeds\\": "src/Databases/Seeds/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ConfrariaWeb\\Location\\Providers\\LocationServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
