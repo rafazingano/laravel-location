@@ -2,7 +2,7 @@
 
 namespace ConfrariaWeb\Location\DataTables;
 
-use ConfrariaWeb\Location\Models\Country;
+use ConfrariaWeb\Location\Models\State;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -24,11 +24,8 @@ class StateDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->startsWithSearch()
-            ->addColumn('count_states', function ($row) {
-                return $row->states->count();
-            })
             ->addColumn('action', function ($row) {
-                return view('location::partials.buttons_datatable', ['obj' => $row, 'nameRoute' => 'admin.locations.countries'])->render();
+                return view('location::partials.buttons_datatable', ['obj' => $row, 'nameRoute' => 'admin.locations.states'])->render();
             });
     }
 
@@ -38,7 +35,7 @@ class StateDataTable extends DataTable
      * @param \App\Country $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Country $model)
+    public function query(State $model)
     {
         return $model->newQuery();
     }
@@ -75,7 +72,6 @@ class StateDataTable extends DataTable
     {
         return [
             Column::make('name'),
-            Column::make('count_states')
         ];
     }
 

@@ -1,58 +1,23 @@
-@extends('layouts.metronic')
-@section('title', __('countries'))
+@extends(config('cw_location.layout'))
+@section('title', __('location::states.cities'))
 @section('content')
-    @include('partials.kt_subheader', [
-      'breadcrumb' => [
-        '#' => __('countries.create')
-      ],
-      'btns' => [
-        route('countries.index') => [
-          'label' => __('return'),
-          'icon' => 'fa fa-plus'
-        ]
-      ]
-    ])
-
-    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                {!! Form::open(['route' => 'countries.store', 'class' => 'horizontal-form']) !!}
-                @include('countries.partials.form')
-                {!! Form::close() !!}
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title float-left">
+                            {{ __($title ?? 'location::states.create') }}
+                        </h3>
+                        @includeIf('location::partials.card_header_pills', ['nameRoute' => 'states'])
+                    </div>
+                    <div class="card-body">
+                        {!! Form::open(['route' => 'admin.locations.states.store', 'class' => 'horizontal-form']) !!}
+                        @include('location::states.partials.form')
+                        {!! Form::close() !!}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 @endsection
-
-@include('countries.partials.kt_aside')
-
-@push('styles')
-
-@endpush
-
-@push('scripts')
-    <script src="{{ asset('assets/vendors/select2/select2.js') }}" type="text/javascript"></script>
-    <script>
-        $(document).ready(function () {
-
-            $('.kt-select2').select2();
-
-            var t;
-            t=KTUtil.isRTL()? {
-                leftArrow: '<i class="la la-angle-right"></i>',
-                rightArrow: '<i class="la la-angle-left"></i>'
-            } : {
-                leftArrow: '<i class="la la-angle-left"></i>',
-                rightArrow: '<i class="la la-angle-right"></i>'
-            };
-            $('.kt_datepicker').datepicker({
-                rtl: KTUtil.isRTL(),
-                todayHighlight: !0,
-                templates: t,
-                format: 'dd/mm/yyyy',
-                language: 'pt-BR'
-            });
-        });
-    </script>
-@endpush

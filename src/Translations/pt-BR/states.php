@@ -7,5 +7,6 @@ return [
     'create' => 'Novo',
     'list' => 'Países',
     'countries' => 'Países',
+    'code' => 'Código',
     'edit' => 'Editar :name',
 ];

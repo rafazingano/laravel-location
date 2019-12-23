@@ -12,7 +12,7 @@ class CreateStatesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('country_region_id')->nullable();
-            $table->string('code', 2);
+            $table->string('code', 3);
             $table->string('name', 255);
             $table->timestamps();
             $table->softDeletes();

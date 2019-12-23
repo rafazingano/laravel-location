@@ -24,9 +24,9 @@ class StoreStateRequest extends FormRequest
     public function rules()
     {
         return [
+            'country_id' => 'required|max:2',
             'name' => 'required|max:255',
-            'code_phone' => 'required|max:5',
-            'lang' => 'required|max:255',
+            'code' => 'required|max:255',
         ];
     }
 
