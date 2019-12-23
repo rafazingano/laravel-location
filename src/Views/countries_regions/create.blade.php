@@ -1,4 +1,4 @@
-@extends(config('cw_address.layout'))
+@extends(config('cw_location.layout'))
 @section('title', __('location::countries.countries'))
 @section('content')
     <div class="container">
