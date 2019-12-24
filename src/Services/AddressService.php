@@ -40,20 +40,20 @@ class AddressService
 
     public function prepareData(array $data)
     {
-        /*
+
         if (!isset($data['country_id']) && isset($data['country'])) {
             $country = $this->country->findBy('name', $data['country']);
-            $data['country_id'] = isset($country) ? $country->id : config('erp.address.default.country');
+            $data['country_id'] = isset($country) ? $country->id : config('cw_location.default.country');
         }
 
         if (!isset($data['state_id']) && isset($data['state_code'])) {
             $state = $this->state->findBy('code', $data['state_code']);
-            $data['state_id'] = isset($state) ? $state->id : config('erp.address.default.state');
+            $data['state_id'] = isset($state) ? $state->id : config('cw_location.default.state');
         }
 
         if (!isset($data['state_id']) && isset($data['state'])) {
             $state = $this->state->findBy('name', $data['state']);
-            $data['state_id'] = isset($state) ? $state->id : config('erp.address.default.state');
+            $data['state_id'] = isset($state) ? $state->id : config('cw_location.default.state');
         }
 
         if (!isset($data['city_id']) && isset($data['city'])) {
@@ -64,7 +64,7 @@ class AddressService
                     'name' => $data['city']
                 ]);
             }
-            $data['city_id'] = isset($city) ? $city->id : config('erp.address.default.city');
+            $data['city_id'] = isset($city) ? $city->id : config('cw_location.default.city');
         }
 
         if (!isset($data['neighborhood_id']) && isset($data['neighborhood'])) {
@@ -95,7 +95,7 @@ class AddressService
         $data['number'] = isset($data['number']) ? $data['number'] : NULL;
         $data['complement'] = collect(explode(',', isset($data['complement']) ? $data['complement'] : NULL));
         $data['postal_code'] = isset($data['postal_code']) ? $data['postal_code'] : NULL;
-        */
+
         return $data;
 
     }

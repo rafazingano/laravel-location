@@ -12,7 +12,7 @@
                         @includeIf('location::partials.card_header_pills', ['nameRoute' => 'cities'])
                     </div>
                     <div class="card-body">
-                        {{ $dataTable->table() }}
+                        @include('location::cities.partials.list')
                     </div>
                 </div>
             </div>
