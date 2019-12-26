@@ -49,6 +49,8 @@ class LocationServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../../config/cw_location.php' => config_path('cw_location.php')], 'config');
 
         Form::component('address', 'location::components.forms.address', ['name' => 'address', 'value' => [], 'attributes' => []]);
+
+        //Blade::component('location::components.address_form', 'addressForm');
     }
 
     /**
