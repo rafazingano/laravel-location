@@ -7,7 +7,7 @@ trait LocationTrait
 
     public function addresses()
     {
-        return $this->morphMany('App\Address', 'addressable');
+        return $this->morphMany('ConfrariaWeb\Location\Models\Address', 'addressable');
     }
 
 }
