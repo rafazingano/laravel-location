@@ -4,7 +4,7 @@
             {{ __('location::addresses.country') }}
             <span class="required">*</span>
         </label>
-        {{ Form::select2(isset($name)? $name . '[country_id]' : 'country_id', isset($address)? $address->country->pluck('name', 'id') : [], isset($address)? $address->country->city_id : null, ['id' => 'country', 'class' => 'form-control col-12', 'placeholder' => 'Selecione um país'], ['server_side' => ['route' => 'api.locations.countries']]) }}
+        {{ Form::select2(isset($name)? $name . '[country_id]' : 'country_id', isset($address)? $address->country->pluck('name', 'id') : [], isset($address)? $address->country->city_id : null, ['id' => 'country', 'class' => 'form-control', 'placeholder' => 'Selecione um país'], ['server_side' => ['route' => 'api.locations.countries']]) }}
     </div>
 </div>
 <div class="col-12">
