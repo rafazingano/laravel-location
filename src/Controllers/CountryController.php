@@ -3,8 +3,8 @@
 namespace ConfrariaWeb\Location\Controllers;
 
 use ConfrariaWeb\Location\DataTables\CountryDataTable;
-use ConfrariaWeb\Location\Requests\StoreOptionRequest;
-use ConfrariaWeb\Location\Requests\UpdateOptionRequest;
+use ConfrariaWeb\Location\Requests\StoreCountryRequest;
+use ConfrariaWeb\Location\Requests\UpdateCountryRequest;
 use ConfrariaWeb\Location\Resources\CountryResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,7 +41,7 @@ class CountryController extends Controller
         return view(config('cw_location.views') . 'countries.create');
     }
 
-    public function store(StoreOptionRequest $request)
+    public function store(StoreCountryRequest $request)
     {
         $input = $request->all();
         $country = resolve('CountryService')->create($input);
@@ -62,7 +62,7 @@ class CountryController extends Controller
         return view(config('cw_location.views') . 'countries.edit', $data);
     }
 
-    public function update(UpdateOptionRequest $request, $id)
+    public function update(UpdateCountryRequest $request, $id)
     {
         $input = $request->all();
         $country = resolve('CountryService')->update($input, $id);
