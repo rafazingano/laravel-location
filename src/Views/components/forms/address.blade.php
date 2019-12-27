@@ -48,7 +48,7 @@
         <label class="control-label">
             {{ __('postal_code') }} <span class="required"> * </span>
         </label>
-        {!! Form::text(isset($name)? $name . '[postal_code]' : 'postal_code', isset($address)? $address->postal_code : null, ['class' => 'form-control', 'placeholder' => 'Digite o nome de display do perfil', 'required', 'data-mask' => config('address.postal_code_mask') ]) !!}
+        {!! Form::text(isset($name)? $name . '[postal_code]' : 'postal_code', isset($address)? $address->postal_code : null, ['class' => 'form-control', 'placeholder' => 'Digite o nome de display do perfil', 'data-mask' => config('address.postal_code_mask') ]) !!}
     </div>
 </div>
 <div class="col-12">
@@ -56,7 +56,7 @@
         <label class="control-label">
             {{ __('number') }} <span class="required"> * </span>
         </label>
-        {!! Form::text(isset($name)? $name . '[number]' : 'number', isset($address)? $address->number : null, ['class' => 'form-control', 'placeholder' => '', 'required' ]) !!}
+        {!! Form::text(isset($name)? $name . '[number]' : 'number', isset($address)? $address->number : null, ['class' => 'form-control', 'placeholder' => '' ]) !!}
     </div>
 </div>
 <div class="col-12">
@@ -64,6 +64,6 @@
         <label class="control-label">
             {{ __('complement') }} <span class="required"> * </span>
         </label>
-        {!! Form::text(isset($name)? $name . '[complement]' : 'complement', isset($address)? $address->complement : null, ['class' => 'form-control', 'placeholder' => '', 'required' ]) !!}
+        {!! Form::text(isset($name)? $name . '[complement]' : 'complement', isset($address)? $address->complement : null, ['class' => 'form-control', 'placeholder' => '' ]) !!}
     </div>
 </div>
