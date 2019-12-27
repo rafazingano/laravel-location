@@ -2,6 +2,7 @@
 
 namespace ConfrariaWeb\Location\Events;
 
+use ConfrariaWeb\Location\Historics\CountryCreatedHistoric;
 use ConfrariaWeb\Location\Models\Country;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -26,7 +27,7 @@ class CountryCreatedEvent
     public function __construct(Country $country)
     {
         $this->obj = $country;
-        $this->historic = new CountryCreatedEvent($country);
+        $this->historic = new CountryCreatedHistoric($country);
     }
 
     /**
