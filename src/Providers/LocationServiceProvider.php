@@ -50,7 +50,6 @@ class LocationServiceProvider extends ServiceProvider
 
         Form::component('address', 'location::components.forms.address', ['name' => 'address', 'value' => [], 'attributes' => []]);
 
-        //Blade::component('location::components.address_form', 'addressForm');
     }
 
     /**
