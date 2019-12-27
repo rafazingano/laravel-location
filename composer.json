@@ -32,7 +32,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ConfrariaWeb\\Location\\Providers\\LocationServiceProvider"
+                "ConfrariaWeb\\Location\\Providers\\LocationServiceProvider",
+                "ConfrariaWeb\\Location\\Providers\\LocationEventServiceProvider"
             ]
         }
     },

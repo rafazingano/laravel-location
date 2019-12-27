@@ -9,7 +9,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CityDataTable extends DataTable
+class CityRegionDataTable extends DataTable
 {
     protected $actions = ['print', 'csv', 'excel', 'pdf'];
 

@@ -4,7 +4,7 @@ namespace ConfrariaWeb\Location\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStateRegionMesoRequest extends FormRequest
+class StoreStateRegionMicroRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,6 @@ class StoreStateRegionMesoRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'code_phone' => 'required|max:5',
-            'lang' => 'required|max:255',
         ];
     }
 
@@ -39,8 +37,6 @@ class StoreStateRegionMesoRequest extends FormRequest
     {
         return [
             'name.required' => 'O nome é obrigatório',
-            'code_phone.required'  => 'O código de telefone é obrigatório',
-            'lang.required'  => 'Lingua é obrigatório',
         ];
     }
 }
