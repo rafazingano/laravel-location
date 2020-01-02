@@ -23,6 +23,9 @@
         "laravelcollective/html": "^6.0",
         "yajra/laravel-datatables": "^1.5"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
     "autoload": {
         "psr-4": {
             "ConfrariaWeb\\Location\\": "src/",

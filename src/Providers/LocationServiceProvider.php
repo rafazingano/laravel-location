@@ -2,6 +2,7 @@
 
 namespace ConfrariaWeb\Location\Providers;
 
+use ConfrariaWeb\Location\Commands\CheckPackage;
 use ConfrariaWeb\Location\Contracts\AddressContract;
 use ConfrariaWeb\Location\Contracts\StreetContract;
 use ConfrariaWeb\Location\Contracts\CityContract;
@@ -41,6 +42,13 @@ class LocationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CheckPackage::class
+            ]);
+        }
+
         $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
         $this->loadRoutesFrom(__DIR__ . '/../Routes/api.php');
         $this->loadMigrationsFrom(__DIR__ . '/../Databases/Migrations');

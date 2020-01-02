@@ -2,6 +2,8 @@
 
 namespace ConfrariaWeb\Location\Events;
 
+use ConfrariaWeb\Location\Historics\CountryUpdatedHistoric;
+use ConfrariaWeb\Location\Models\Country;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +16,18 @@ class CountryUpdatedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $obj;
+    public $historic;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Country $country)
     {
-        //
+        $this->obj = $country;
+        $this->historic = new CountryUpdatedHistoric($country);
     }
 
     /**
