@@ -1,7 +1,7 @@
-@extends('layouts.metronic')
+@extends('meridien::layouts.metronic')
 @section('title', __('addresses'))
 @section('content')
-    @include('partials.kt_subheader', [
+    @include('meridien::partials.kt_subheader', [
       'breadcrumb' => [
         '#' => __('addresses.create')
       ],
