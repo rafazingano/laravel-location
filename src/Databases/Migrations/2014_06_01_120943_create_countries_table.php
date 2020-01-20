@@ -24,6 +24,7 @@ class CreateCountriesTable extends Migration
             $table->string('name', 255);
             $table->timestamps();
             $table->softDeletes();
+
             $table->foreign('country_id')
                 ->references('id')
                 ->on('location_countries')

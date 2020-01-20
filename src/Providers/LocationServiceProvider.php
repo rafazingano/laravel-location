@@ -54,7 +54,7 @@ class LocationServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Databases/Migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../Translations', 'location');
         $this->loadViewsFrom(__DIR__ . '/../Views', 'location');
-        $this->publishes([__DIR__ . '/../../config/cw_location.php' => config_path('cw_location.php')], 'config');
+        $this->publishes([__DIR__ . '/../../config/cw_location.php' => config_path('cw_location.php')], 'cw_location');
 
         Form::component('address', 'location::components.forms.address', ['name' => 'address', 'value' => [], 'attributes' => []]);
 

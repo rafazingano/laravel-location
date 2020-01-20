@@ -25,13 +25,13 @@ class AddressController extends Controller
     public function trashed()
     {
         $this->data['addreses'] = resolve('AddressService')->trashed();
-        return view(config('cw_location.views') . 'addresses.index', $this->data);
+        return view(config('cw_location.views') . 'locations.addresses.index', $this->data);
     }
 
     public function index(AddressDataTable $addressDataTable)
     {
         $this->data['addresses'] = resolve('AddressService')->all();
-        return $addressDataTable->render(config('cw_location.views') . 'addresses.index', $this->data);
+        return $addressDataTable->render(config('cw_location.views') . 'locations.addresses.index', $this->data);
     }
 
     public function create()

@@ -35,7 +35,7 @@ class CityController extends Controller
     public function index(CityDataTable $cityDataTable)
     {
         $this->data['cities'] = resolve('CityService')->all();
-        return $cityDataTable->render(config('cw_location.views') . 'cities.index', $this->data);
+        return $cityDataTable->render(config('cw_location.views') . 'locations.cities.index', $this->data);
     }
 
     public function create()

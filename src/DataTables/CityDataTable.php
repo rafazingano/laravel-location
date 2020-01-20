@@ -2,7 +2,7 @@
 
 namespace ConfrariaWeb\Location\DataTables;
 
-use ConfrariaWeb\Location\Models\Country;
+use ConfrariaWeb\Location\Models\City;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -13,45 +13,28 @@ class CityDataTable extends DataTable
 {
     protected $actions = ['print', 'csv', 'excel', 'pdf'];
 
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
         return datatables()
             ->eloquent($query)
             ->startsWithSearch()
-            ->addColumn('count_states', function ($row) {
-                return $row->states->count();
+            ->addColumn('count_addresses', function ($row) {
+                return $row->addresses->count();
             })
             ->addColumn('action', function ($row) {
-                return view('location::partials.buttons_datatable', ['obj' => $row, 'nameRoute' => 'admin.locations.countries'])->render();
+                return view('location::partials.buttons_datatable', ['obj' => $row, 'nameRoute' => 'admin.locations.cities'])->render();
             });
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Country $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function query(Country $model)
+    public function query(City $model)
     {
         return $model->newQuery();
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         return $this->builder()
-            ->setTableId('country-table')
+            ->setTableId('city-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -66,26 +49,16 @@ class CityDataTable extends DataTable
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
             Column::make('name'),
-            Column::make('count_states')
+            Column::make('count_addresses')
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename()
     {
-        return 'Country_' . date('YmdHis');
+        return 'City_' . date('YmdHis');
     }
 }
