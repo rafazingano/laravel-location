@@ -2,16 +2,18 @@
 
 namespace ConfrariaWeb\Location\Services;
 
-use ConfrariaWeb\Location\Contracts\CityContract;
-use ConfrariaWeb\Vendor\Traits\ServiceTrait;
+use ConfrariaWeb\Location\Models\City;
 
 class CityService
 {
-    use ServiceTrait;
 
-    public function __construct(CityContract $city)
+    public function __construct()
     {
-        $this->obj = $city;
+        //
+    }
+
+    public function all($state_id = NULL){
+        return City::where('state_id', $state_id)->get();
     }
 
 }

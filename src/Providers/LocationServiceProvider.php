@@ -3,33 +3,8 @@
 namespace ConfrariaWeb\Location\Providers;
 
 use ConfrariaWeb\Location\Commands\CheckPackage;
-use ConfrariaWeb\Location\Contracts\AddressContract;
-use ConfrariaWeb\Location\Contracts\StreetContract;
-use ConfrariaWeb\Location\Contracts\CityContract;
-use ConfrariaWeb\Location\Contracts\CityRegionContract;
-use ConfrariaWeb\Location\Contracts\CountryContract;
-use ConfrariaWeb\Location\Contracts\CountryRegionContract;
-use ConfrariaWeb\Location\Contracts\NeighborhoodContract;
-use ConfrariaWeb\Location\Contracts\StateContract;
-use ConfrariaWeb\Location\Repositories\AddressRepository;
-use ConfrariaWeb\Location\Repositories\StreetRepository;
-use ConfrariaWeb\Location\Repositories\CityRegionRepository;
-use ConfrariaWeb\Location\Repositories\CityRepository;
-use ConfrariaWeb\Location\Repositories\CountryRegionRepository;
-use ConfrariaWeb\Location\Repositories\CountryRepository;
-use ConfrariaWeb\Location\Repositories\NeighborhoodRepository;
-use ConfrariaWeb\Location\Repositories\StateRepository;
-use ConfrariaWeb\Location\Services\AddressService;
-use ConfrariaWeb\Location\Services\StreetService;
-use ConfrariaWeb\Location\Services\CityRegionService;
-use ConfrariaWeb\Location\Services\CityService;
-use ConfrariaWeb\Location\Services\CountryRegionService;
-use ConfrariaWeb\Location\Services\CountryService;
-use ConfrariaWeb\Location\Services\NeighborhoodService;
-use ConfrariaWeb\Location\Services\StateService;
-
-use Collective\Html\FormFacade as Form;
-
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 
 class LocationServiceProvider extends ServiceProvider
@@ -48,16 +23,9 @@ class LocationServiceProvider extends ServiceProvider
                 CheckPackage::class
             ]);
         }
-
-        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
-        $this->loadRoutesFrom(__DIR__ . '/../Routes/api.php');
-        $this->loadMigrationsFrom(__DIR__ . '/../Databases/Migrations');
-        $this->loadTranslationsFrom(__DIR__ . '/../Translations', 'location');
-        $this->loadViewsFrom(__DIR__ . '/../Views', 'location');
+        $this->loadMigrationsFrom(__DIR__ . '/../../databases/Migrations');
+        $this->registerSeedsFrom(__DIR__.'/../../databases/Seeds');
         $this->publishes([__DIR__ . '/../../config/cw_location.php' => config_path('cw_location.php')], 'cw_location');
-
-        Form::component('address', 'location::components.forms.address', ['name' => 'address', 'value' => [], 'attributes' => []]);
-
     }
 
     /**
@@ -67,53 +35,73 @@ class LocationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(CountryContract::class, CountryRepository::class);
-        $this->app->bind('CountryService', function ($app) {
-            return new CountryService($app->make(CountryContract::class));
-        });
+        
 
-        $this->app->bind(CountryRegionContract::class, CountryRegionRepository::class);
-        $this->app->bind('CountryRegionService', function ($app) {
-            return new CountryRegionService($app->make(CountryRegionContract::class));
-        });
+    }
 
-        $this->app->bind(StateContract::class, StateRepository::class);
-        $this->app->bind('StateService', function ($app) {
-            return new StateService($app->make(StateContract::class));
-        });
+    /**
+     * Register seeds.
+     *
+     * @param string  $path
+     * @return void
+     */
+    protected function registerSeedsFrom($path)
+    {
+        if ($this->app->runningInConsole()) {
+            $command = Request::server('argv', null);
+            if (is_array($command)) {
+                $command = implode(' ', $command);
+                if ($command == "artisan db:seed") {
+                    $file_names = glob( $path . '/*.php');
+                    foreach ($file_names as $filename)
+                    {
+                        $classes = $this->getClassesFromFile($filename);
+                        foreach ($classes as $class) {
+                            Artisan::call('db:seed', ['--class' => $class]);
+                            //Artisan::call('db:seed', [ '--class' => $class, '--force' => '' ]);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-        $this->app->bind(CityContract::class, CityRepository::class);
-        $this->app->bind('CityService', function ($app) {
-            return new CityService($app->make(CityContract::class));
-        });
+    /**
+     * Get full class names declared in the specified file.
+     *
+     * @param string $filename
+     * @return array an array of class names.
+     */
+    private function getClassesFromFile(string $filename) : array
+    {
+        // Get namespace of class (if vary)
+        $namespace = "";
+        $lines = file($filename);
+        $namespaceLines = preg_grep('/^namespace /', $lines);
+        if (is_array($namespaceLines)) {
+            $namespaceLine = array_shift($namespaceLines);
+            $match = array();
+            preg_match('/^namespace (.*);$/', $namespaceLine, $match);
+            $namespace = array_pop($match);
+        }
 
-        $this->app->bind(CityRegionContract::class, CityRegionRepository::class);
-        $this->app->bind('CityRegionService', function ($app) {
-            return new CityRegionService($app->make(CityRegionContract::class));
-        });
+        // Get name of all class has in the file.
+        $classes = array();
+        $php_code = file_get_contents($filename);
+        $tokens = token_get_all($php_code);
+        $count = count($tokens);
+        for ($i = 2; $i < $count; $i++) {
+            if ($tokens[$i - 2][0] == T_CLASS && $tokens[$i - 1][0] == T_WHITESPACE && $tokens[$i][0] == T_STRING) {
+                $class_name = $tokens[$i][1];
+                if ($namespace !== "") {
+                    $classes[] = $namespace . "\\$class_name";
+                } else {
+                    $classes[] = $class_name;
+                }
+            }
+        }
 
-        $this->app->bind(NeighborhoodContract::class, NeighborhoodRepository::class);
-        $this->app->bind('NeighborhoodService', function ($app) {
-            return new NeighborhoodService($app->make(NeighborhoodContract::class));
-        });
-
-        $this->app->bind(StreetContract::class, StreetRepository::class);
-        $this->app->bind('StreetService', function ($app) {
-            return new StreetService($app->make(StreetContract::class));
-        });
-
-        $this->app->bind(AddressContract::class, AddressRepository::class);
-        $this->app->bind('AddressService', function ($app) {
-            return new AddressService(
-                $app->make(CountryContract::class),
-                $app->make(StateContract::class),
-                $app->make(CityContract::class),
-                $app->make(NeighborhoodContract::class),
-                $app->make(StreetContract::class),
-                $app->make(AddressContract::class)
-            );
-        });
-
+        return $classes;
     }
 
 }

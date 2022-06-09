@@ -2,16 +2,18 @@
 
 namespace ConfrariaWeb\Location\Services;
 
-use ConfrariaWeb\Location\Contracts\StateContract;
-use ConfrariaWeb\Vendor\Traits\RepositoryTrait;
+use ConfrariaWeb\Location\Models\State;
 
 class StateService
 {
-    use RepositoryTrait;
 
-    public function __construct(StateContract $state)
+    public function __construct()
     {
-        $this->obj = $state;
+        //
+    }
+
+    public function all($country_id = NULL){
+        return State::where('country_id', $country_id)->get();
     }
 
 }

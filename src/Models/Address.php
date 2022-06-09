@@ -15,12 +15,13 @@ class Address extends Model
     protected $fillable = [
         'city_id',
         'city_region_id',
-        'neighborhood_id',
+        'district_id',
         'street_id',
         'name',
         'number',
         'complement',
-        'postal_code'
+        'zip_code',
+        'floor'
     ];
 
     protected $casts = [
@@ -42,9 +43,9 @@ class Address extends Model
         return $this->belongsTo(CityRegion::class);
     }
 
-    public function neighborhood()
+    public function district()
     {
-        return $this->belongsTo(Neighborhood::class);
+        return $this->belongsTo(District::class);
     }
 
     public function street()

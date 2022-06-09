@@ -28,6 +28,11 @@ class City extends Model
         return $this->belongsTo(StateMicroRegion::class, 'state_micro_region_id');
     }
 
+    public function districts()
+    {
+        return $this->hasMany(District::class);
+    }
+
     public function addresses()
     {
         return $this->hasMany(Location::class);

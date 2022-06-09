@@ -16,11 +16,7 @@
         }
     ],
     "require": {
-        "confrariaweb/laravel-historic": "dev-master",
-        "confrariaweb/laravel-select2": "dev-master",
-        "confrariaweb/laravel-vendor": "dev-master",
-        "laravelcollective/html": ">=6.0",
-        "yajra/laravel-datatables": ">=1.5"
+
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0"
@@ -28,14 +24,13 @@
     "autoload": {
         "psr-4": {
             "ConfrariaWeb\\Location\\": "src/",
-            "ConfrariaWeb\\Location\\Databases\\Seeds\\": "src/Databases/Seeds/"
+            "ConfrariaWeb\\Location\\Databases\\Seeds\\": "databases/Seeds"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "ConfrariaWeb\\Location\\Providers\\LocationServiceProvider",
-                "ConfrariaWeb\\Location\\Providers\\LocationEventServiceProvider"
+                "ConfrariaWeb\\Location\\Providers\\LocationServiceProvider"
             ]
         }
     },

@@ -2,16 +2,18 @@
 
 namespace ConfrariaWeb\Location\Services;
 
-use ConfrariaWeb\Location\Contracts\CountryContract;
-use ConfrariaWeb\Vendor\Traits\ServiceTrait;
+use ConfrariaWeb\Location\Models\Country;
 
 class CountryService
 {
-    use ServiceTrait;
 
-    public function __construct(CountryContract $country)
+    public function __construct()
     {
-        $this->obj = $country;
+        //
+    }
+
+    public function all(){
+        return Country::all();
     }
 
 }

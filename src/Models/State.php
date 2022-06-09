@@ -2,6 +2,7 @@
 
 namespace ConfrariaWeb\Location\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,6 +18,18 @@ class State extends Model
         'code',
         'name'
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('sort_by_name', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
+    }
 
     public function scopeCode($query, $code)
     {
