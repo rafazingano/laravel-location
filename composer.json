@@ -1,6 +1,6 @@
 {
     "name": "confrariaweb/laravel-location",
-    "version": "dev-master",
+    "version": "1.0.0",
     "description": "Location pack for laravel framework",
     "keywords": [
         "location",
